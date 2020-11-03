@@ -163,6 +163,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   maxStep: 0
+  teleport: {fileID: 7126506499012134873, guid: 4c84ee4f1c244df49ba3915ad2ad0b81,
+    type: 3}
   rooms: []
   wallType:
     singleLeft: {fileID: 5505054857395650423, guid: a6eca9ea7594ad54f9d97ffbe5b6b49d,
@@ -849,6 +851,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1946395745, guid: 2a2550843c342de4e93147938e401994, type: 3}
+      propertyPath: m_Text
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5947549602658268985, guid: 2a2550843c342de4e93147938e401994,
         type: 3}
       propertyPath: m_Name

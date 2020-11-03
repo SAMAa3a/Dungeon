@@ -6,15 +6,24 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private Animator anim;
     private float moveX, moveY;//moveH,moveV
 
-    [SerializeField]
-    private float moveSpeed;
+    [Header("PlayerAttribute")]
+    public float moveSpeed;
+    public float slashSpeed = 1.0f;
+    public float slashScale = 1.6f;
+    public float criticRate = 0.05f;
+    public float cirticBonus = 1.5f;
+    public float strength = 0;
 
-    //private float hp = 0;
-    //private float maxHp = 200;
-    //private bool isAttacked = false;
-    //public HealthBar healthBar;
+    [Header("AboutHealth")]
+    public HealthBar healthBar;
+    public LayerMask touchEnemy;
+    private float hp = 0;
+    private float maxHp = 200;
+    private bool isAttacked = false;
+
 
     public static PlayerMovement instance;
 
@@ -38,9 +47,11 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
 
-        //hp = maxHp;
-        //healthBar.ChangeHealth(hp, maxHp);
+        //health init
+        hp = maxHp;
+        healthBar.ChangeHealth(hp, maxHp);
     }
 
     private void Update()
@@ -48,11 +59,17 @@ public class PlayerMovement : MonoBehaviour
         moveX = Input.GetAxis("Horizontal") * moveSpeed;
         moveY = Input.GetAxis("Vertical") * moveSpeed;
         Flip();
+
+        //switch anim
+        anim.SetFloat("speed", new Vector2(moveX, moveY).sqrMagnitude);
     }
 
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(moveX, moveY);
+
+        //Use ovelapBox to check enemies
+        CheckEnemies();
     }
 
 
@@ -70,24 +87,34 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //private void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if(other.gameObject.CompareTag("EnemyTouch"))
-    //    {
-    //        if(!isAttacked)
-    //        {
-    //            isAttacked = true;
-    //            StartCoroutine(Timer());
-    //            hp -= 20f;
-    //            healthBar.ChangeHealth(hp, maxHp);
-    //            healthBar.DoHealthEffect();
-    //        }
-    //    }
-    //}
+    private void CheckEnemies()
+    {
+        if (Physics2D.OverlapBox(transform.position + new Vector3(0.03374965f, -0.07559937f, 0),
+            new Vector2(0.4573055f, 0.7138029f), 0, touchEnemy))
+        {
+            if (!isAttacked)
+            {
+                isAttacked = true;
+                StartCoroutine(Timer());
+                hp -= 20f;
+                healthBar.ChangeHealth(hp, maxHp);
 
-    //IEnumerator Timer()
-    //{
-    //    yield return new WaitForSeconds(0.1f);
-    //    isAttacked = false;
-    //}
+                //rb.velocity = new Vector2(rb.velocity.x + 3f, rb.velocity.y + 3f);
+
+                if(hp <= 0)
+                {
+                    Destroy(gameObject);
+                    FindObjectOfType<SceneFader>().FadeTo();
+                }
+
+                healthBar.DoHealthEffect();
+            }
+        }
+    }
+
+    IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(0.3f);
+        isAttacked = false;
+    }
 }

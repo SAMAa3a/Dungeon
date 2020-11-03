@@ -577,6 +577,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2781889318727598172}
   - component: {fileID: 3235993643534325534}
+  - component: {fileID: 4249120019136093917}
   m_Layer: 0
   m_Name: Point
   m_TagString: Untagged
@@ -620,9 +621,28 @@ MonoBehaviour:
   - {fileID: 5840962905244302997}
   - {fileID: 2093359135356487106}
   - {fileID: 4199601731228569316}
-  rewardPoint: {fileID: 33140623711489526}
   enemyPrefab: {fileID: 3964142553338953130, guid: 8808a873b4f293448a236d6b1b88923f,
     type: 3}
+--- !u!114 &4249120019136093917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5880909959148237509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56f5c3fdce58d4d4e8e192ecce2204d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewardPoint: {fileID: 33140623711489526}
+  rewardPrefabs:
+  - {fileID: 1689297259021450374, guid: a2cdd27f078533147ae8ee3f23b01dc7, type: 3}
+  - {fileID: 4774155264510138677, guid: 23c243af6bf19934b884b0115541494c, type: 3}
+  - {fileID: 3195869627445904961, guid: ec79900c129a30f46ad28a401ae388e9, type: 3}
+  - {fileID: 1046827778916842728, guid: b3e32e77e35210a419e32d581807eb80, type: 3}
+  - {fileID: 566443442904720018, guid: aa871dfc98903434a8e4023ab45ef4af, type: 3}
+  - {fileID: 4942046727807599206, guid: aecfac39802bdfb438319267d1723171, type: 3}
 --- !u!1 &6594927963677639786
 GameObject:
   m_ObjectHideFlags: 0

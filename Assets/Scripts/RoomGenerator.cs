@@ -24,6 +24,8 @@ public class RoomGenerator : MonoBehaviour
     public LayerMask roomLayer;
     public int maxStep;
 
+    public GameObject teleport;
+
     //the use of the List<T>
     public List<Room> rooms = new List<Room>();
 
@@ -73,7 +75,7 @@ public class RoomGenerator : MonoBehaviour
         //find the endRoom
         FindEndRoom();
 
-        endRoom.GetComponent<SpriteRenderer>().color = endColor;
+        EndRoomFunc();
     }
 
     // Update is called once per frame
@@ -219,6 +221,14 @@ public class RoomGenerator : MonoBehaviour
         {
             endRoom = farRooms[Random.Range(0, farRooms.Count)];
         }
+    }
+
+    public void EndRoomFunc()
+    {
+        endRoom.GetComponent<SpriteRenderer>().color = endColor;
+
+        Instantiate(teleport,
+            new Vector3(endRoom.transform.position.x - 7f, endRoom.transform.position.y - 3f, 0), Quaternion.identity);
     }
 }
 

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class Slash : MonoBehaviour
 {
     [SerializeField] private float minDamage, maxDamage;
+
     private float attackDamage;
 
     public GameObject damageCanvas;
@@ -21,8 +22,15 @@ public class Slash : MonoBehaviour
         if(other.gameObject.CompareTag("Enemy"))
         {
             //Debug.Log("We hit the enemy");
-            attackDamage = Random.Range(minDamage, maxDamage);
+            attackDamage = Random.Range(minDamage, maxDamage) + PlayerMovement.instance.strength;
 
+            //Critic
+            if(Random.Range(0f, 100f) <= PlayerMovement.instance.criticRate * 100)
+            {
+                attackDamage *= PlayerMovement.instance.cirticBonus;
+            }
+
+            //score
             scoreF += Mathf.Floor(attackDamage);
             score.text = scoreF.ToString();
 

@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyGenerator : MonoBehaviour
 {
     public Transform[] gameObjects = new Transform[4];
-    public Transform rewardPoint;
     public GameObject enemyPrefab;
 
     void Start()
@@ -17,11 +16,6 @@ public class EnemyGenerator : MonoBehaviour
             {
                 Instantiate(enemyPrefab, gameObjects[i].transform.position, Quaternion.identity);
             }
-        }
-
-        if(Random.Range(0,5) < 1)
-        {
-
         }
     }
 }
